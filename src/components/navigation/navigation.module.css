@@ -1,0 +1,234 @@
+.header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 80;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: var(--header-height);
+  padding: 0 var(--page-gutter);
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(to bottom, rgb(5 7 6 / 0.94), rgb(5 7 6 / 0.66));
+  backdrop-filter: blur(14px);
+}
+
+.brand {
+  justify-self: start;
+  font: 650 0.92rem/1 var(--font-display);
+  letter-spacing: -0.04em;
+}
+
+.signal {
+  margin-inline: 0.15rem;
+  color: var(--signal);
+}
+
+.routeStatus {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  color: var(--muted);
+  font: 400 0.62rem/1 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.routeStatus span:first-child {
+  color: var(--signal);
+}
+
+.menuButton {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-self: end;
+  min-height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--paper);
+  cursor: pointer;
+  font: 500 0.72rem/1 var(--font-mono);
+  text-transform: uppercase;
+}
+
+.menuGlyph {
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid var(--line);
+  transition:
+    border-color 180ms ease,
+    rotate 300ms ease;
+}
+
+.menuGlyph::before,
+.menuGlyph::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.75rem;
+  height: 1px;
+  background: currentColor;
+  content: "";
+  translate: -50% -50%;
+  transition: rotate 300ms ease;
+}
+
+.menuGlyph::after {
+  rotate: 90deg;
+}
+
+.menuGlyph[data-open="true"] {
+  border-color: var(--signal);
+  rotate: 45deg;
+}
+
+.navigationOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: calc(var(--header-height) + 2rem) var(--page-gutter) 2rem;
+  overflow-y: auto;
+  background:
+    linear-gradient(
+      135deg,
+      transparent 0 74%,
+      rgb(198 255 50 / 0.05) 74% 75%,
+      transparent 75%
+    ),
+    var(--void);
+}
+
+.menuMeta,
+.menuFooter {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font: 400 0.58rem/1.4 var(--font-mono);
+  letter-spacing: 0.08em;
+}
+
+.menuList {
+  display: grid;
+  align-content: center;
+  margin: 0;
+  padding: 3rem 0;
+  list-style: none;
+}
+
+.menuLink {
+  display: grid;
+  grid-template-columns: 3rem 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line);
+  transition:
+    color 180ms ease,
+    padding 300ms ease;
+}
+
+.menuLink > span {
+  color: var(--muted);
+  font: 400 0.62rem/1 var(--font-mono);
+}
+
+.menuLink strong {
+  font-size: clamp(2.7rem, 8vw, 7.6rem);
+  font-weight: 480;
+  line-height: 0.9;
+  letter-spacing: -0.07em;
+  text-transform: uppercase;
+}
+
+.menuLink:hover,
+.menuLink:focus-visible,
+.menuLink[data-active="true"] {
+  padding-inline: 0.75rem;
+  color: var(--signal);
+}
+
+.stack {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  overflow: hidden;
+  pointer-events: none;
+  perspective: 1200px;
+}
+
+.slab {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.15rem var(--page-gutter);
+  border-top: 1px solid var(--signal);
+  background: linear-gradient(120deg, rgb(198 255 50 / 0.08), transparent 35%), var(--void);
+  box-shadow: 0 -2rem 5rem rgb(0 0 0 / 0.45);
+  color: var(--paper);
+  font: 400 0.6rem/1 var(--font-mono);
+  text-transform: uppercase;
+  transform-origin: 50% 100%;
+}
+
+.slab span:nth-child(2) {
+  color: var(--signal);
+}
+
+.cursor {
+  position: fixed;
+  top: -1.25rem;
+  left: -1.25rem;
+  z-index: 500;
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  border: 1px solid rgb(198 255 50 / 0.65);
+  border-radius: 50%;
+  pointer-events: none;
+  transition:
+    width 180ms ease,
+    height 180ms ease,
+    border-color 180ms ease;
+}
+
+.cursor span {
+  width: 0.22rem;
+  height: 0.22rem;
+  border-radius: 50%;
+  background: var(--signal);
+}
+
+.cursor[data-interactive="true"] {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-color: rgb(242 240 232 / 0.85);
+}
+
+@media (max-width: 700px) {
+  .header {
+    grid-template-columns: 1fr auto;
+  }
+
+  .routeStatus {
+    display: none;
+  }
+
+  .menuLink {
+    grid-template-columns: 2rem 1fr auto;
+  }
+
+  .menuLink strong {
+    font-size: clamp(2.35rem, 14vw, 5rem);
+  }
+
+  .menuFooter span:first-child,
+  .menuMeta span:last-child {
+    display: none;
+  }
+}
