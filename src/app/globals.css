@@ -1,0 +1,190 @@
+@import "tailwindcss";
+@import "@fontsource-variable/space-grotesk";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+
+:root {
+  --void: #050706;
+  --paper: #f2f0e8;
+  --signal: #c6ff32;
+  --graphite: #1b211c;
+  --muted: #808a81;
+  --line: rgb(242 240 232 / 0.14);
+  --header-height: 5rem;
+  --page-gutter: clamp(1rem, 3vw, 3rem);
+  --font-display: "Space Grotesk Variable", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--void);
+  color: var(--paper);
+  scroll-behavior: auto;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: clip;
+  background: var(--void);
+  font-family: var(--font-display);
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--signal);
+  color: var(--void);
+}
+
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 4px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1000;
+  translate: 0 -200%;
+  background: var(--signal);
+  color: var(--void);
+  padding: 0.75rem 1rem;
+  font: 500 0.75rem/1 var(--font-mono);
+  transition: translate 180ms ease;
+}
+
+.skip-link:focus {
+  translate: 0;
+}
+
+.site-grid {
+  background-image:
+    linear-gradient(to right, rgb(242 240 232 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(242 240 232 / 0.04) 1px, transparent 1px);
+  background-size: min(8vw, 7rem) min(8vw, 7rem);
+  mask-image: linear-gradient(to bottom, black 0%, transparent 94%);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.atlas-action-signal {
+  color: var(--void);
+}
+
+.atlas-action-signal:hover {
+  color: var(--signal);
+}
+
+.loading-screen,
+.error-screen {
+  display: grid;
+  min-height: 100vh;
+  align-content: center;
+  gap: 1.5rem;
+  padding: calc(var(--header-height) + 3rem) var(--page-gutter) 4rem;
+  background: var(--void);
+}
+
+.loading-screen p,
+.error-screen > p:first-child {
+  color: var(--signal);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+}
+
+.loading-line {
+  width: min(42rem, 100%);
+  height: 1px;
+  overflow: hidden;
+  background: var(--line);
+}
+
+.loading-line span {
+  display: block;
+  width: 40%;
+  height: 100%;
+  background: var(--signal);
+  animation: loading-scan 1.4s ease-in-out infinite;
+}
+
+.error-screen h1 {
+  max-width: 12ch;
+  margin: 0;
+  font-size: clamp(3.4rem, 10vw, 9rem);
+  font-weight: 450;
+  line-height: 0.86;
+  letter-spacing: -0.07em;
+  text-transform: uppercase;
+}
+
+.error-screen > p:not(:first-child) {
+  max-width: 42rem;
+  color: #a5ada5;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.error-screen button,
+.error-screen a {
+  width: fit-content;
+  min-height: 3rem;
+  padding: 0.9rem 1.2rem;
+  border: 1px solid var(--signal);
+  background: transparent;
+  color: var(--paper);
+  cursor: pointer;
+  font: 500 0.68rem/1 var(--font-mono);
+  text-transform: uppercase;
+}
+
+@keyframes loading-scan {
+  from {
+    translate: -100% 0;
+  }
+  to {
+    translate: 350% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

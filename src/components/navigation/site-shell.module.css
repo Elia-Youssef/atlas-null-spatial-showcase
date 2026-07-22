@@ -1,0 +1,86 @@
+.worldLayer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.interfaceLayer {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+.footer {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) 1fr auto;
+  gap: 2rem;
+  align-items: end;
+  padding: 4rem var(--page-gutter) 2rem;
+  border-top: 1px solid var(--line);
+  background: rgb(5 7 6 / 0.92);
+}
+
+.footerBrand {
+  font-size: clamp(1.6rem, 4vw, 3.5rem);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+}
+
+.footer > div p {
+  max-width: 34rem;
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.footer nav {
+  display: grid;
+  gap: 0.75rem;
+  font: 400 0.68rem/1 var(--font-mono);
+  text-transform: uppercase;
+}
+
+.footer nav a {
+  width: fit-content;
+  border-bottom: 1px solid transparent;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.footer nav a:hover,
+.footer nav a:focus-visible {
+  border-color: var(--signal);
+  color: var(--signal);
+}
+
+.footerStatus {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 0;
+  color: var(--muted);
+  font: 400 0.58rem/1 var(--font-mono);
+}
+
+.footerStatus span {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--signal);
+  box-shadow: 0 0 0.75rem var(--signal);
+}
+
+@media (max-width: 760px) {
+  .footer {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footerStatus {
+    grid-column: 1 / -1;
+  }
+}
