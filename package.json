@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Production-grade spatial systems showcase with procedural WebGL worlds, cinematic transitions, accessible component APIs, and static GitHub Pages delivery.",
   "private": true,
+  "packageManager": "npm@10.9.4",
   "author": "Elia Youssef",
   "homepage": "https://elia-youssef.github.io/atlas-null-spatial-showcase/",
   "repository": {
